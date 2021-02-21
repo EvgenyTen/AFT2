@@ -12,7 +12,6 @@ import java.util.Map;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
-import static org.testng.Assert.assertEquals;
 
 public class AssertionSteps {
     @SneakyThrows
