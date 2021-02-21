@@ -65,12 +65,12 @@ public class HeaderPage extends AbstractPage {
     }
 
 
-    @Step("Присутствует элемент 'Помощь'")
+    @Step("Присутствует элемент с названием 'Помощь'")
     public String help() {
         return help.getText();
     }
 
-    @Step("Присутствует элемент 'Поиск'")
+    @Step("Присутствует элемент с названием 'Поиск'")
     public String searchLabel() {
         return searchLabel.getText();
     }

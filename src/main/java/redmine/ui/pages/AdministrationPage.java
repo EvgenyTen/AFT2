@@ -16,12 +16,12 @@ public class AdministrationPage extends AbstractPage {
     @FindBy(xpath = "//a[@class='icon icon-user users']")
     public WebElement users;
 
-    @Step("Элемент 'Администрирование' отображается")
+    @Step("Отображается название страницы с текстом 'Администрирование'")
     public String adminPageName() {
         return adminPageName.getText();
     }
 
-    @Step("Элемент 'Пользователи' отображается")
+    @Step("Отображается название страницы с текстом 'Пользователи'")
     public String users() {
         return users.getText();
     }

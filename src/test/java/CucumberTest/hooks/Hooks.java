@@ -1,4 +1,4 @@
-package bddTests.hooks;
+package CucumberTest.hooks;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

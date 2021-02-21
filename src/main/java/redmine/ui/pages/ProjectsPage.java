@@ -25,7 +25,7 @@ public class ProjectsPage extends AbstractPage {
         return projectPageName.getText();
     }
 
-    @Step("Присутствует соответсвующее название проекта")
+    @Step("Присутствует соответствующее название проекта")
     public static String projectName(String projectName) {
         String fullProjectNameXpath = String.format("//a[text()='%s']", projectName);
         return driver().findElement(By.xpath(fullProjectNameXpath)).getText();
