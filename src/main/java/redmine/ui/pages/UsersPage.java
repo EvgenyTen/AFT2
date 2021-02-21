@@ -21,13 +21,14 @@ public class UsersPage extends AbstractPage {
     public WebElement usersHeaderInTable;
 
     @FindBy(xpath = "//tr[@class='user active']//td[@class='username']")
-    public List<WebElement> listOfUsersInTableByUsername;
+    public List<WebElement> listOfUsernamesInTable;
 
     @FindBy(xpath = "//tr[@class='user active']//td[@class='lastname']")
-    public List<WebElement> listOfUsersInTableByLastNames;
+    public List<WebElement> listOfLastNamesInTable;
+
 
     @FindBy(xpath = "//tr[@class='user active']//td[@class='firstname']")
-    public List<WebElement> listOfUsersInTableByNames;
+    public List<WebElement> listOfNamesInTable;
 
     @CucumberName("Фамилия")
     @FindBy(xpath = "//table[@class='list users']//a[text()='Фамилия']")

@@ -45,7 +45,7 @@ public class NewUserCreationPage extends AbstractPage {
     public WebElement flashNoticeAboutNewUSerCreation;
 
     @Step("Уведомление о добавлении нового пользователя")
-    public String flashNoticeAboutNewUSerCreation() {
+    public String getFlashNoticeAboutNewUserCreation() {
         return flashNoticeAboutNewUSerCreation.getText();
     }
 

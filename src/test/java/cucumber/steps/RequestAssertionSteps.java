@@ -128,7 +128,7 @@ public class RequestAssertionSteps {
         assertEquals(dbUser.get("status"), userContext.getStatus());
     }
 
-    @То("В теле содержится информация пользователя {string} , отсутствуют поля admin и apikey")
+    @То("В теле содержится информация пользователя {string}, отсутствуют поля admin и apikey")
     public void assertUserInformationExistWithoutApiAndAdmin(String stashId) {
         User user = Context.get(stashId, User.class);
         Response response = Context.get("response", Response.class);
