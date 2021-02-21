@@ -123,7 +123,6 @@ public class RequestSteps {
         String uri = String.format("users/%d.json", userId);
         Request request = new RestRequest(uri, HttpMethods.DELETE, null, null, null);
         Response response = apiClient.executeRequest(request);
-        UserDto userDto = response.getBody(UserDto.class);
         Context.put("response", response);
     }
 
