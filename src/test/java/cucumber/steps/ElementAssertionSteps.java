@@ -12,7 +12,6 @@ import redmine.ui.pages.UsersPage;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
 import redmine.utils.Asserts;
 import redmine.utils.BrowserUtils;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,7 @@ public class ElementAssertionSteps {
         User userContext = Context.get(userDataStashId, User.class);
         String result = String.format("%s %s %s", user, userContext.getLogin(), created);
         WebElement element = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", "Уведомление о создании нового пользователя");
-        Assert.assertEquals(element.getText(), result);
+        Asserts.assertEquals(element.getText(), result);
     }
 
     @И("Отображается проект {string}")
@@ -108,7 +107,7 @@ public class ElementAssertionSteps {
                     .stream()
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
-            Assert.assertEquals(actualList, expectedOrderedByDescList);
+            Asserts.assertEquals(actualList, expectedOrderedByDescList);
         }
         if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
@@ -119,7 +118,7 @@ public class ElementAssertionSteps {
                     .stream()
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
-            Assert.assertEquals(actualList, expectedOrderedByDescList);
+            Asserts.assertEquals(actualList, expectedOrderedByDescList);
         }
         if (fieldElement.equals("Логин")) {
             List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
@@ -130,7 +129,7 @@ public class ElementAssertionSteps {
                     .stream()
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
-            Assert.assertEquals(actualList, expectedOrderedByDescList);
+            Asserts.assertEquals(actualList, expectedOrderedByDescList);
         }
     }
 
@@ -146,7 +145,7 @@ public class ElementAssertionSteps {
                     .sorted(String::compareToIgnoreCase)
                     .collect(Collectors.toList());
 
-            Assert.assertEquals(actualList, expectedOrderedByAscList);
+            Asserts.assertEquals(actualList, expectedOrderedByAscList);
         }
         if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
@@ -158,7 +157,7 @@ public class ElementAssertionSteps {
                     .sorted(String::compareToIgnoreCase)
                     .collect(Collectors.toList());
 
-            Assert.assertEquals(actualList, expectedOrderedByAscList);
+            Asserts.assertEquals(actualList, expectedOrderedByAscList);
         }
         if (fieldElement.equals("Логин")) {
             List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
@@ -170,7 +169,7 @@ public class ElementAssertionSteps {
                     .sorted(String::compareToIgnoreCase)
                     .collect(Collectors.toList());
 
-            Assert.assertEquals(actualList, expectedOrderedByAscList);
+            Asserts.assertEquals(actualList, expectedOrderedByAscList);
         }
     }
 

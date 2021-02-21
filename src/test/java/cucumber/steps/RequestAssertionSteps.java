@@ -30,9 +30,9 @@ public class RequestAssertionSteps {
         List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
-        assertEquals(dbUser.get("login"), userContext.getLogin());
-        assertEquals(dbUser.get("firstname"), userContext.getFirstName());
-        assertEquals(dbUser.get("lastname"), userContext.getLastName());
+        Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
+        Asserts.assertEquals(dbUser.get("firstname"), userContext.getFirstName());
+        Asserts.assertEquals(dbUser.get("lastname"), userContext.getLastName());
     }
 
     @То("Тело содержит данные созданного пользователя {string}")
@@ -41,14 +41,14 @@ public class RequestAssertionSteps {
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
         Assert.assertNotNull(createdUser.getUser().getId());
-        assertEquals(createdUser.getUser().getLogin(), userContext.getUser().getLogin());
-        assertEquals(createdUser.getUser().getFirstname(), userContext.getUser().getFirstname());
-        assertEquals(createdUser.getUser().getLastname(), userContext.getUser().getLastname());
+        Asserts.assertEquals(createdUser.getUser().getLogin(), userContext.getUser().getLogin());
+        Asserts.assertEquals(createdUser.getUser().getFirstname(), userContext.getUser().getFirstname());
+        Asserts.assertEquals(createdUser.getUser().getLastname(), userContext.getUser().getLastname());
         Assert.assertNull(createdUser.getUser().getPassword());
-        assertEquals(createdUser.getUser().getMail(), userContext.getUser().getMail());
+        Asserts.assertEquals(createdUser.getUser().getMail(), userContext.getUser().getMail());
         Assert.assertNull(createdUser.getUser().getLast_login_on());
-        assertEquals(createdUser.getUser().getStatus(), userContext.getUser().getStatus());
-        Assert.assertEquals(createdUser.getUser().getAdmin(), userContext.getUser().getAdmin());
+        Asserts.assertEquals(createdUser.getUser().getStatus(), userContext.getUser().getStatus());
+        Asserts.assertEquals(createdUser.getUser().getAdmin(), userContext.getUser().getAdmin());
     }
 
     @И("В базе данных появилась запись с данными пользователя {string}")
@@ -58,10 +58,10 @@ public class RequestAssertionSteps {
         List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
-        assertEquals(dbUser.get("login"), userContext.getUser().getLogin());
-        assertEquals(dbUser.get("firstname"), userContext.getUser().getFirstname());
-        assertEquals(dbUser.get("lastname"), userContext.getUser().getLastname());
-        assertEquals(dbUser.get("status"), userContext.getUser().getStatus());
+        Asserts.assertEquals(dbUser.get("login"), userContext.getUser().getLogin());
+        Asserts.assertEquals(dbUser.get("firstname"), userContext.getUser().getFirstname());
+        Asserts.assertEquals(dbUser.get("lastname"), userContext.getUser().getLastname());
+        Asserts.assertEquals(dbUser.get("status"), userContext.getUser().getStatus());
     }
 
     @То("Тело ответа содержит {int} ошибки,с текстом:{string},{string},{string}")
@@ -69,17 +69,17 @@ public class RequestAssertionSteps {
         if (errorNumber == 2) {
             Response response = Context.get("response", Response.class);
             UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
-            assertEquals(errors.getErrors().size(), 2);
-            assertEquals(errors.getErrors().get(0), "Email уже существует");
-            assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
+            Asserts.assertEquals(errors.getErrors().size(), 2);
+            Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
+            Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
         }
         if (errorNumber == 3) {
             Response response = Context.get("response", Response.class);
             UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
-            assertEquals(errors.getErrors().size(), 3);
-            assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
-            assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
-            assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
+            Asserts.assertEquals(errors.getErrors().size(), 3);
+            Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
+            Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
+            Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
         }
     }
 
@@ -90,7 +90,7 @@ public class RequestAssertionSteps {
         String query = String.format("select * from users where login='%s'", userContext.getUser().getLogin());
         List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
         Map<String, Object> dbUser = result.get(0);
-        assertEquals(dbUser.get("status"), 1);
+        Asserts.assertEquals(dbUser.get("status"), 1);
     }
 
     @То("В базе данных отсутствует информация о  пользователе {string} созданном {string}")
@@ -107,9 +107,9 @@ public class RequestAssertionSteps {
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
         Assert.assertNotNull(createdUser.getUser().getId());
-        assertEquals(createdUser.getUser().getLogin(), user.getLogin());
-        assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
-        assertEquals(createdUser.getUser().getLastname(), user.getLastName());
+        Asserts.assertEquals(createdUser.getUser().getLogin(), user.getLogin());
+        Asserts.assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
+        Asserts.assertEquals(createdUser.getUser().getLastname(), user.getLastName());
         Assert.assertNull(createdUser.getUser().getPassword());
         Assert.assertEquals(createdUser.getUser().getAdmin(), user.getAdmin());
         Assert.assertEquals(createdUser.getUser().getApi_key(), user.getApiKey());
@@ -122,10 +122,10 @@ public class RequestAssertionSteps {
         List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
-        assertEquals(dbUser.get("login"), userContext.getLogin());
-        assertEquals(dbUser.get("firstname"), userContext.getFirstName());
-        assertEquals(dbUser.get("lastname"), userContext.getLastName());
-        assertEquals(dbUser.get("status"), userContext.getStatus());
+        Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
+        Asserts.assertEquals(dbUser.get("firstname"), userContext.getFirstName());
+        Asserts.assertEquals(dbUser.get("lastname"), userContext.getLastName());
+        Asserts.assertEquals(dbUser.get("status"), userContext.getStatus());
     }
 
     @То("В теле содержится информация пользователя {string}, отсутствуют поля admin и apikey")
@@ -134,9 +134,9 @@ public class RequestAssertionSteps {
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
         Assert.assertNotNull(createdUser.getUser().getId());
-        assertEquals(createdUser.getUser().getLogin(), user.getLogin());
-        assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
-        assertEquals(createdUser.getUser().getLastname(), user.getLastName());
+        Asserts.assertEquals(createdUser.getUser().getLogin(), user.getLogin());
+        Asserts.assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
+        Asserts.assertEquals(createdUser.getUser().getLastname(), user.getLastName());
         Assert.assertNull(createdUser.getUser().getPassword());
         Assert.assertNull(createdUser.getUser().getAdmin());
         Assert.assertNull(createdUser.getUser().getApi_key());
