@@ -43,8 +43,10 @@ public class ElementSteps {
 
     @И("Установить чекбокс {string}")
     public void setCreatePassword(String fieldName) {
-        WebElement elementMail = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", fieldName);
-        elementMail.click();
+        WebElement elementCreatePasswordCheckBox = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", fieldName);
+        if(!elementCreatePasswordCheckBox.isSelected()){
+            elementCreatePasswordCheckBox.click();
+        }
     }
 
     @Если("В шапке таблицы пользователей нажать на {string}")
