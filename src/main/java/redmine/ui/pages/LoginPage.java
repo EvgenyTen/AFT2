@@ -21,7 +21,7 @@ public class LoginPage extends AbstractPage {
 
     @CucumberName("Уведомление об ожидании подтверждения")
     @FindBy(xpath = "//div[@id='flash_error']")
-    public WebElement flashError;
+    public WebElement messageAboutApproval;
 
     @Step("Авторизация в Редмине c логином: {0} и паролем: {1}")
     public void login(String login, String password) {
@@ -34,7 +34,7 @@ public class LoginPage extends AbstractPage {
 
     @Step("Уведомление об ожидании подтверждения")
     public String noticeAboutAccountApproval() {
-        return flashError.getText();
+        return messageAboutApproval.getText();
     }
 
 }
