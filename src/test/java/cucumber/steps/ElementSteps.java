@@ -47,17 +47,17 @@ public class ElementSteps {
         elementMail.click();
     }
 
-    @Если("В шапке {string} {string}")
+    @Если("В шапке {string} нажать на {string}")
     public void pushTableHeader(String tableStashId, String fieldElement) {
-        if (Objects.equals(fieldElement, "нажать на Фамилия")) {
+        if (Objects.equals(fieldElement, "Фамилия")) {
             WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Фамилия");
             pushFamily.click();
         }
-        if (Objects.equals(fieldElement, "нажать на Имя")) {
+        if (Objects.equals(fieldElement, "Имя")) {
             WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Имя");
             pushName.click();
         }
-        if (Objects.equals(fieldElement, "нажать на Пользователь")) {
+        if (Objects.equals(fieldElement, "Пользователь")) {
             WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Пользователь");
             pushUser.click();
         }
