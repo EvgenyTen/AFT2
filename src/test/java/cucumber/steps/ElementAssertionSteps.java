@@ -71,7 +71,7 @@ public class ElementAssertionSteps {
 
     @И("Таблица пользователей не отсортирована по столбцу {string}")
     public void assertUnSorting(String fieldElement) {
-        if (fieldElement.equals("Фамилия")) {
+        if(fieldElement.equals("Фамилия")) {
             List<String> actualList = getPage(UsersPage.class).listOfLastNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -82,7 +82,7 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
             Assert.assertNotEquals(actualList, notExpectedOrderedByAscList);
         }
-        else if (fieldElement.equals("Имя")) {
+        else if(fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -95,7 +95,7 @@ public class ElementAssertionSteps {
             Assert.assertNotEquals(actualList, notExpectedOrderedByAscList);
         }
         else{
-            throw new IllegalArgumentException("Не корректный параметр");
+            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
         }
 
     }
@@ -136,12 +136,12 @@ public class ElementAssertionSteps {
             Asserts.assertEquals(actualList, expectedOrderedByDescList);
         }
         else{
-            throw new IllegalArgumentException("Не корректный параметр");
+            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
         }
     }
 
-    @И("{string} отсортирована по {string} по возрастанию")
-    public void assertSortingByAsc(String tableStashId, String fieldElement) {
+    @И("Таблица пользователей отсортирована по столбцу {string}, по возрастанию")
+    public void assertSortingByAsc(String fieldElement) {
         if (fieldElement.equals("Фамилия")) {
             List<String> actualList = getPage(UsersPage.class).listOfLastNamesInTable
                     .stream()
@@ -154,7 +154,7 @@ public class ElementAssertionSteps {
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
         }
-        if (fieldElement.equals("Имя")) {
+        else if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -166,7 +166,7 @@ public class ElementAssertionSteps {
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
         }
-        if (fieldElement.equals("Логин")) {
+        else if (fieldElement.equals("Логин")) {
             List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -177,6 +177,9 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
+        }
+        else{
+            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
         }
     }
 
