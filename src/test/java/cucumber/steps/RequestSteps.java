@@ -129,15 +129,7 @@ public class RequestSteps {
 
     @Если("Отправить запрос на удаление несуществующего пользователя {string} пользователем {string}")
     public void sendRequestOnNonExistUserDelete(String userStashDto, String stashId) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
-        User user = Context.get(stashId, User.class);
-        ApiClient apiClient = new RestApiClient(user);
-        Integer userId = userContext.getUser().getId();
-        String uri = String.format("users/%d.json", userId);
-        Request request = new RestRequest(uri, HttpMethods.DELETE, null, null, null);
-        Response response = apiClient.executeRequest(request);
-        UserDto userDto = response.getBody(UserDto.class);
-        Context.put("response", response);
+        sendRequestOnUserDelete(userStashDto, stashId);
     }
 
 
