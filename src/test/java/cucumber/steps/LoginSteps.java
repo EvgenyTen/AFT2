@@ -24,7 +24,7 @@ public class LoginSteps {
         Manager.openPage("login");
     }
 
-    @И("Для пользователя отображается ошибка {string} с текстом {string}")
+    @И("Для пользователя отображается {string} с текстом {string}")
     public void flashNoticeAboutAccountConfirmationByAdmin(String fieldName, String text) {
         WebElement element = CucumberPageObjectHelper.getElementBy("Вход в систему", fieldName);
         String actualElementName = element.getText();

@@ -19,7 +19,7 @@ public class LoginPage extends AbstractPage {
     @FindBy(xpath = "//input[@id='login-submit']")
     public WebElement submitButton;
 
-    @CucumberName("Вошли как")
+    @CucumberName("Уведомление об ожидании подтверждения")
     @FindBy(xpath = "//div[@id='flash_error']")
     public WebElement flashError;
 
@@ -32,8 +32,8 @@ public class LoginPage extends AbstractPage {
     }
 
 
-    @Step("Уведомление об ошибке")
-    public String errorMessage() {
+    @Step("Уведомление об ожидании подтверждения")
+    public String noticeAboutAccountApproval() {
         return flashError.getText();
     }
 
