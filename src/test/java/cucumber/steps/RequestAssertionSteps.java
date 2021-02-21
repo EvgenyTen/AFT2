@@ -101,7 +101,7 @@ public class RequestAssertionSteps {
         Assert.assertEquals(result.size(), 0, "Проверка отсутствия");
     }
 
-    @То("В теле содержится информация пользователя {string} о самом себе, присутсутвуют поля admin и apikey")
+    @То("В теле содержится информация пользователя {string} о самом себе, присутcтвуют поля admin и apikey")
     public void assertUserInformationExistWithApiAndAdmin(String stashId) {
         User user = Context.get(stashId, User.class);
         Response response = Context.get("response", Response.class);
