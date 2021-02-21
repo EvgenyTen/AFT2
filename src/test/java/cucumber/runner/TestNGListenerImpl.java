@@ -1,4 +1,4 @@
-package CucumberTest.runner;
+package cucumber.runner;
 
 import org.testng.ITestNGListener;
 

@@ -1,8 +1,7 @@
-package CucumberTest.steps;
+package cucumber.steps;
 
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
-import lombok.SneakyThrows;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import redmine.managers.Context;
@@ -42,7 +41,6 @@ public class ElementAssertionSteps {
         Assert.assertFalse(BrowserUtils.isElementCurrentlyPresent(element));
     }
 
-    @SneakyThrows
     @То("Отображается сообщение {string}{string}{string}")
     public void assertCreationMessage(String user, String userDataStashId, String created) {
         User userContext = Context.get(userDataStashId, User.class);

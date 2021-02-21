@@ -1,4 +1,4 @@
-package CucumberTest.steps;
+package cucumber.steps;
 
 import cucumber.api.java.ru.Пусть;
 import redmine.cucumber.ParametersValidator;

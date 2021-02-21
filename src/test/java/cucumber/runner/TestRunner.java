@@ -1,4 +1,4 @@
-package CucumberTest.runner;
+package cucumber.runner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 
 @CucumberOptions(
         plugin = {"pretty", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm", "json:target/cucumber.json"},
-        glue = {"CucumberTest"},
+        glue = {"cucumber"},
         features = "src/test/resources",
         tags = {"@UI","API"}
 )

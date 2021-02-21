@@ -1,4 +1,4 @@
-package CucumberTest.hooks;
+package cucumber.hooks;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

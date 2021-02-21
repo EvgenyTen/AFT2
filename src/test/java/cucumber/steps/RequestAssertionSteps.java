@@ -1,4 +1,4 @@
-package CucumberTest.steps;
+package cucumber.steps;
 
 import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
