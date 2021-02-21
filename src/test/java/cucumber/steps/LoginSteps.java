@@ -24,9 +24,8 @@ public class LoginSteps {
         Manager.openPage("login");
     }
 
-    @И("Для {string} отображается ошибка {string} с текстом {string}")
-    public void flashNoticeAboutAccount(String stashId, String fieldName, String text) {
-        User user = Context.get(stashId, User.class);
+    @И("Для пользователя отображается ошибка {string} с текстом {string}")
+    public void flashNoticeAboutAccountConfirmationByAdmin(String fieldName, String text) {
         WebElement element = CucumberPageObjectHelper.getElementBy("Вход в систему", fieldName);
         String actualElementName = element.getText();
         Asserts.assertEquals(actualElementName, text);
