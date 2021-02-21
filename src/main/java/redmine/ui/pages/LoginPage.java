@@ -31,7 +31,6 @@ public class LoginPage extends AbstractPage {
         submitButton.click();
     }
 
-
     @Step("Уведомление об ожидании подтверждения")
     public String noticeAboutAccountApproval() {
         return messageAboutApproval.getText();
