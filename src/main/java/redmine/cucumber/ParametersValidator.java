@@ -19,4 +19,5 @@ public class ParametersValidator {
         parameters.forEach((key, value) -> Assert.assertTrue(AllowedParameters.PROJECT_PARAMETERS.contains(key),
                 "Список допустимых параметров по работе с проектами не содержит параметр" + key));
     }
+
 }
