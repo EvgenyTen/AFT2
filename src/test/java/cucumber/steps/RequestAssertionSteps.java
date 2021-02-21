@@ -12,7 +12,6 @@ import redmine.model.user.User;
 import redmine.utils.Asserts;
 import java.util.List;
 import java.util.Map;
-import static redmine.utils.Asserts.assertEquals;
 import static redmine.utils.gson.GsonHelper.getGson;
 
 public class RequestAssertionSteps {
