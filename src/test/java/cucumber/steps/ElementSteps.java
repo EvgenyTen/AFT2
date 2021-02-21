@@ -47,19 +47,22 @@ public class ElementSteps {
         elementMail.click();
     }
 
-    @Если("В шапке {string} нажать на {string}")
-    public void pushTableHeader(String tableStashId, String fieldElement) {
+    @Если("В шапке таблицы пользователей нажать на {string}")
+    public void pushTableHeader(String fieldElement) {
         if (Objects.equals(fieldElement, "Фамилия")) {
             WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Фамилия");
             pushFamily.click();
         }
-        if (Objects.equals(fieldElement, "Имя")) {
+        else if (Objects.equals(fieldElement, "Имя")) {
             WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Имя");
             pushName.click();
         }
-        if (Objects.equals(fieldElement, "Пользователь")) {
+        else if (Objects.equals(fieldElement, "Пользователь")) {
             WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Пользователь");
             pushUser.click();
+        }
+        else{
+            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
         }
     }
 }
