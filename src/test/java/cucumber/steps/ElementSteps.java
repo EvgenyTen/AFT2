@@ -50,15 +50,15 @@ public class ElementSteps {
     @Если("В шапке {string} нажать на {string}")
     public void pushTableHeader(String tableStashId, String fieldElement) {
         if (Objects.equals(fieldElement, "Фамилия")) {
-            WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Фамилия");
+            WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Фамилия");
             pushFamily.click();
         }
         if (Objects.equals(fieldElement, "Имя")) {
-            WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Имя");
+            WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Имя");
             pushName.click();
         }
         if (Objects.equals(fieldElement, "Пользователь")) {
-            WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "нажать на Пользователь");
+            WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Пользователь");
             pushUser.click();
         }
     }
