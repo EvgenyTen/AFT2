@@ -20,4 +20,9 @@ public class ParametersValidator {
                 "Список допустимых параметров по работе с проектами не содержит параметр" + key));
     }
 
+    public static void validateErrorParameters(Map<String, String> parameters) {
+        parameters.forEach((key, value) -> Assert.assertTrue(AllowedParameters.ERROR_TEXTS.contains(key),
+                "Список допустимых ошибок не содержит параметр" + key));
+    }
+
 }
