@@ -2,15 +2,16 @@ package cucumber.steps;
 
 import cucumber.api.java.ru.Пусть;
 import redmine.cucumber.ParametersValidator;
-import redmine.db.requests.ProjectRequests;
 import redmine.managers.Context;
 import redmine.model.project.Project;
 import redmine.model.role.*;
 import redmine.model.user.User;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
 
@@ -89,7 +90,7 @@ public class GeneratorsSteps {
         Project project = Context.get(projectStashId, Project.class);
         User user = Context.get(stashId, User.class);
         Role role = Context.get(roleStashId, Role.class);
-        ProjectRequests.addUserAndRoleToProject(project, user, role);
+        Project.addUserAndRoleToProject(project, user, role);
     }
 }
 
