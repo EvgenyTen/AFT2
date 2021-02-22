@@ -116,8 +116,8 @@ public class RequestAssertionSteps {
     @И("В теле содержится информация о пользователе {string}")
     public void assertUserInformationExistInDb(String stashId) {
         User userContext = Context.get(stashId, User.class);
-        String query = String.format("select * from users where login='%s'", userContext.getLogin());
-        List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+        String query = "select * from users where login=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,userContext.getLogin());
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
         Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
