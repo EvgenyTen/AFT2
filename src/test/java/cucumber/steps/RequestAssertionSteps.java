@@ -82,7 +82,7 @@ public class RequestAssertionSteps {
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
             Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
         }else{
-            throw new IllegalArgumentException("Нужно добавить случаи для большего количества ошибок " + receivedErrors);
+            throw new IllegalArgumentException("Нужно добавить случаи для большего количества ошибок " + receivedErrorsCount);
         }
     }
 
