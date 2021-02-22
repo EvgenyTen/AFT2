@@ -63,8 +63,8 @@ public class RequestAssertionSteps {
         Asserts.assertEquals(dbUser.get("status"), userContext.getUser().getStatus());
     }
 
-    @То("Тело ответа содержит {int} ошибки,с текстом:{string},{string},{string}")
-    public void errorsCheck(Integer errorNumber, String errorEmail, String errorLogin, String errorChars) {
+    @То("Тело ответа содержит {int} ошибки,с текстом:")
+    public void errorsCheck(Integer errorNumber) {
         if (errorNumber == 2) {
             Response response = Context.get("response", Response.class);
             UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
