@@ -35,6 +35,7 @@ public class LoginSteps {
         User user = Context.get(stashId, User.class);
         WebElement element = CucumberPageObjectHelper.getElementBy(pageName, fieldName);
         String actualElementName = element.getText();
+        System.out.println(actualElementName);
         Asserts.assertEquals(actualElementName, "Вошли как " + user.getLogin());
     }
 }
