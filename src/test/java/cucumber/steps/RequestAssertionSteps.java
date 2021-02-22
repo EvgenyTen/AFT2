@@ -4,14 +4,17 @@ import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
 import org.testng.Assert;
 import redmine.api.interfaces.Response;
+import redmine.cucumber.ParametersValidator;
 import redmine.managers.Context;
 import redmine.managers.Manager;
 import redmine.model.dto.UserCreationError;
 import redmine.model.dto.UserDto;
 import redmine.model.user.User;
 import redmine.utils.Asserts;
+
 import java.util.List;
 import java.util.Map;
+
 import static redmine.utils.gson.GsonHelper.getGson;
 
 public class RequestAssertionSteps {
@@ -64,17 +67,17 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело ответа содержит {int} ошибки,с текстом:")
-    public void errorsCheck(Integer errorNumber) {
-        if (errorNumber == 2) {
-            Response response = Context.get("response", Response.class);
-            UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
+    public void errorsCheck(Integer errorCount,List<String> parameters ) {
+        ParametersValidator.validateErrorParameters(parameters);
+        Response response = Context.get("response", Response.class);
+        UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
+
+        if (errorCount == 2) {
             Asserts.assertEquals(errors.getErrors().size(), 2);
             Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
         }
-        if (errorNumber == 3) {
-            Response response = Context.get("response", Response.class);
-            UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
+        if (errorCount == 3) {
             Asserts.assertEquals(errors.getErrors().size(), 3);
             Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");

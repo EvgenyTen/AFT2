@@ -14,7 +14,7 @@ public class AllowedParameters {
             "Права");
     static final List<String> USER_PARAMETERS = ImmutableList.of("Администратор", "Статус");
     static final List<String> PROJECT_PARAMETERS = ImmutableList.of("Публичный");
-    static final List<String> ERROR_TEXTS = ImmutableList.of( "Email уже существует",
-     "Пользователь уже существует","Пароль недостаточной длины (не может быть меньше 8 символа)");
+    static final List<String> ERROR_TEXTS = ImmutableList.of("Email уже существует", "Пользователь уже существует",
+     "Пароль недостаточной длины (не может быть меньше 8 символа)");
 
 }
