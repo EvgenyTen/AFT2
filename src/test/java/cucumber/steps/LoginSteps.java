@@ -30,13 +30,16 @@ public class LoginSteps {
         Asserts.assertEquals(actualElementName, text);
     }
 
-    @И("На странице {string} присутствует элемент {string}")
-    public void assertLoggedAsElement(String pageName, String stashId) {
-        String username=stashId.substring(10);
-        System.out.println(username);
-        User user = Context.get(username, User.class);
-        WebElement element = CucumberPageObjectHelper.getElementBy(pageName, "Вошли как");
+    @И("На странице {string} присутствует элемент {string}{string}")
+    public void assertLoggedAsElement(String pageName, String fieldName, String stashId) {
+        User user = Context.get(stashId, User.class);
+        WebElement element = CucumberPageObjectHelper.getElementBy(pageName, fieldName);
         String actualElementName = element.getText();
+        System.out.println(actualElementName);
         Asserts.assertEquals(actualElementName, "Вошли как " + user.getLogin());
+    }
+
+    @И("На странице {string} текст элемента {string} содержит логин пользователя {string}")
+    public void assertActiveUserLoginInLoggedAs(String pageName, String fieldName, String stashId) {
     }
 }

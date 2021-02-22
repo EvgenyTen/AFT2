@@ -20,6 +20,10 @@ public class HeaderPage extends AbstractPage {
     @FindBy(xpath = "//div[@id='loggedas']")
     public WebElement loggedAs;
 
+    @CucumberName("Логин вошедшего пользователя")
+    @FindBy(xpath="")
+    public WebElement activeUser;
+
     @FindBy(xpath = "//a[@class='home']")
     public WebElement adminHomePage;
 
@@ -64,7 +68,6 @@ public class HeaderPage extends AbstractPage {
         return loggedAs.getText();
     }
 
-
     @Step("Присутствует элемент с названием 'Помощь'")
     public String help() {
         return help.getText();
@@ -75,4 +78,8 @@ public class HeaderPage extends AbstractPage {
         return searchLabel.getText();
     }
 
+    @Step("Присутствует элемент с названием 'Логин вошедшего пользователя'")
+    public String active(){
+        return activeUser.getText();
+    }
 }
