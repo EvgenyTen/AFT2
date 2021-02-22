@@ -2,7 +2,6 @@ package redmine.cucumber;
 
 import org.testng.Assert;
 
-import java.util.List;
 import java.util.Map;
 
 public class ParametersValidator {
@@ -21,9 +20,9 @@ public class ParametersValidator {
                 "Список допустимых параметров по работе с проектами не содержит параметр" + key));
     }
 
-    public static void validateErrorParameters(List<String> parameters) {
-        parameters.forEach(value -> Assert.assertTrue(AllowedParameters.ERROR_TEXTS.contains(value),
-                "Список допустимых ошибок не содержит параметр" + value));
+    public static void validateErrorParameters(Map<String,String> parameters) {
+        parameters.forEach((key, value)  -> Assert.assertTrue(AllowedParameters.ERROR_TEXTS.contains(key),
+                "Список допустимых ошибок не содержит параметр " + key));
     }
 
 }

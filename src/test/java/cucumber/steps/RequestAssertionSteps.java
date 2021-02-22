@@ -67,7 +67,7 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело ответа содержит {int} ошибки,с текстом:")
-    public void errorsCheck(Integer errorCount,List<String> parameters ) {
+    public void errorsCheck(Integer errorCount,Map <String,String> parameters ) {
         ParametersValidator.validateErrorParameters(parameters);
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
