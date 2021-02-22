@@ -67,16 +67,16 @@ public class RequestAssertionSteps {
 
     @То("Тело ответа содержит {int} ошибки,с текстом:")
     public void errorsCheck(Integer errorCount,List <String> parameters ) {
-        int receivedErrors=parameters.size();
+        int receivedErrorsCount=parameters.size();
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
 
-        if (receivedErrors == 2) {
+        if (receivedErrorsCount == 2) {
             Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
         }
-        else if (receivedErrors == 3) {
+        else if (receivedErrorsCount == 3) {
             Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
