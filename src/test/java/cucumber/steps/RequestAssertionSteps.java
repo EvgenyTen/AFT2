@@ -53,7 +53,7 @@ public class RequestAssertionSteps {
     @И("В базе данных появилась запись с данными пользователя {string}")
     public void assertUserInformationExistAfterCreationInDb(String userDataStashId) {
         UserDto userContext = Context.get(userDataStashId, UserDto.class);
-        String query = String.format("select * from users where login=?");
+        String query = "select * from users where login=?";
         List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
@@ -94,8 +94,8 @@ public class RequestAssertionSteps {
     @То("В базе данных отсутствует информация о пользователе {string}, созданном {string}")
     public void assertUserInformationAbsentInDbAfterDeleteRequest(String userStashDto, String stashId) {
         UserDto userContext = Context.get(userStashDto, UserDto.class);
-        String query = String.format("select * from users where login='%s'", userContext.getUser().getLogin());
-        List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+        String query = "select * from users where login=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
         Assert.assertEquals(result.size(), 0, "Проверка отсутствия");
     }
 
