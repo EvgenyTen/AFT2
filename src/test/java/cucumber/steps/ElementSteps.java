@@ -22,7 +22,7 @@ public class ElementSteps {
         element.sendKeys(text);
     }
 
-    @Если("Заполнить данные пользователя корректными значениями и сохраняем в переменную {string}")
+    @Если("Заполнить данные пользователя корректными случайносгенерированными значениями пользователя {string}")
     public void generateAndFillNewUserForm(String userDataStashId) {
         User createdUser = new User();
         String mail = randomEmail();
