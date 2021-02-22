@@ -2,10 +2,7 @@ package redmine.db.requests;
 
 import io.qameta.allure.Step;
 import redmine.managers.Manager;
-import redmine.model.role.IssuesVisibility;
-import redmine.model.role.Role;
-import redmine.model.role.RolePermissions;
-import redmine.model.role.TimeEntriesVisibility;
+import redmine.model.role.*;
 
 import java.util.List;
 import java.util.Map;
@@ -33,16 +30,38 @@ public class RoleRequests {
                 }).collect(Collectors.toList());
     }
 
+
+    public static Role getRoleById(Integer id) {
+        String query = String.format("SELECT * FROM roles WHERE id=%d", id);
+        return getRole(query);
+    }
+
+    public static Role getRoleByName(String name) {
+        String query = String.format("SELECT * FROM roles WHERE name='%s'", name);
+        return getRole(query);
+    }
+
     @Step("Информация о роли получена")
-    public static Role getRole(Role objectRole) {
-        return getAllRoles().stream()
-                .filter(role -> {
-                    if (objectRole.getId() == null) {
-                        return objectRole.getName().equals(role.getName());
-                    } else return (objectRole.getId().equals(role.getId()));
-                })
-                .findFirst()
-                .orElse(null);
+    public static Role getRole(String query) {
+    List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+    Role roleInDb =  result.stream()
+          .map(map -> {
+           Role role = new Role();
+           role.setId((Integer) map.get("id"));
+           role.setPosition((Integer) map.get("position"));
+           role.setBuiltin((Integer) map.get("builtin"));
+           role.setName((String) map.get("name"));
+           role.setAssignable((Boolean) map.get("assignable"));
+           role.setIssuesVisibility(IssuesVisibility.valueOf(((String) map.get("issues_visibility")).toUpperCase()));
+           role.setUsersVisibility( UsersVisibility.valueOf(((String) map.get("users_visibility")).toUpperCase()));
+           role.setPermissions( RolePermissions.of((String) map.get("permissions") ));
+           role.setTimeEntriesVisibility( TimeEntriesVisibility.valueOf(((String) map.get("time_entries_visibility")).toUpperCase()));
+           role.setAllRolesManaged((Boolean) map.get("all_roles_managed"));
+           role.setSettings((String) map.get("settings"));
+           return role;})
+                    .findFirst()
+                    .orElse(null);
+           return roleInDb;
     }
 
     @Step("Создание роли")
