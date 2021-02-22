@@ -4,7 +4,6 @@ import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
 import org.testng.Assert;
 import redmine.api.interfaces.Response;
-import redmine.cucumber.ParametersValidator;
 import redmine.managers.Context;
 import redmine.managers.Manager;
 import redmine.model.dto.UserCreationError;
@@ -67,21 +66,23 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело ответа содержит {int} ошибки,с текстом:")
-    public void errorsCheck(Integer errorCount,Map <String,String> parameters ) {
-        ParametersValidator.validateErrorParameters(parameters);
+    public void errorsCheck(Integer errorCount,List <String> parameters ) {
+        int receivedErrors=parameters.size();
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
 
-        if (errorCount == 2) {
-            Asserts.assertEquals(errors.getErrors().size(), 2);
+        if (receivedErrors == 2) {
+            Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
         }
-        if (errorCount == 3) {
-            Asserts.assertEquals(errors.getErrors().size(), 3);
+        else if (receivedErrors == 3) {
+            Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
             Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
+        }else{
+            throw new IllegalArgumentException("Нужно добавить случаи для большего количества ошибок " + receivedErrors);
         }
     }
 
