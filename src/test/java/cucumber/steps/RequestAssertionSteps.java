@@ -91,7 +91,7 @@ public class RequestAssertionSteps {
         Asserts.assertEquals(dbUser.get("status"), 1);
     }
 
-    @То("В базе данных отсутствует информация о пользователе {string}, созданном другим пользователем")
+    @То("В базе данных отсутствует информация о пользователе {string}, созданном администратором")
     public void assertUserInformationAbsentInDbAfterDeleteRequest(String userStashDto) {
         UserDto userContext = Context.get(userStashDto, UserDto.class);
         String query = "select * from users where login=?";
