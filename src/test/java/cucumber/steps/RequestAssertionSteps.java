@@ -85,8 +85,8 @@ public class RequestAssertionSteps {
     @То("В базе данных изменилась запись с данными пользователя {string}")
     public void assertUserInformationChangedAfterPutRequest(String userStashDto) {
         UserDto userContext = Context.get(userStashDto, UserDto.class);
-        String query = String.format("select * from users where login='%s'", userContext.getUser().getLogin());
-        List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+        String query = "select * from users where login=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,userContext.getUser().getLogin());
         Map<String, Object> dbUser = result.get(0);
         Asserts.assertEquals(dbUser.get("status"), 1);
     }
