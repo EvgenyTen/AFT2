@@ -27,7 +27,7 @@ public class GeneratorsSteps {
                 user.setStatus(Integer.parseInt(parameters.get("Статус")));
             }
         }
-        user.generate();
+        //user.generate();
         Context.put(stashId, user);
     }
 
