@@ -11,7 +11,6 @@ import java.util.Map;
 
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.valueOf;
 
 public class AssertionSteps {
     @SneakyThrows
@@ -20,13 +19,13 @@ public class AssertionSteps {
         Role role = Context.get(roleStashId, Role.class);
         ParametersValidator.validateRoleParameters(parameters);
         if (parameters.containsKey("Позиция")) {
-            Asserts.assertEquals(role.getPosition(), valueOf(parseInt(parameters.get("Позиция"))));
+            Asserts.assertEquals(role.getPosition(), parseInt(parameters.get("Позиция")));
         }
         if (parameters.containsKey("Встроенная")) {
-            Asserts.assertEquals(role.getBuiltin(), valueOf(parseInt(parameters.get("Встроенная"))));
+            Asserts.assertEquals(role.getBuiltin(), parseInt(parameters.get("Встроенная")));
         }
         if (parameters.containsKey("Задача может быть назначена этой роли")) {
-            Asserts.assertEquals(role.getAssignable(), Boolean.valueOf(parseBoolean(parameters.get("Задача может быть назначена этой роли"))));
+            Asserts.assertEquals(role.getAssignable(), parseBoolean(parameters.get("Задача может быть назначена этой роли")));
         }
         if (parameters.containsKey("Видимость задач")) {
             Asserts.assertEquals(role.getIssuesVisibility(), IssuesVisibility.of(parameters.get("Видимость задач")));
