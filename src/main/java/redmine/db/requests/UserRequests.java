@@ -93,10 +93,9 @@ public class UserRequests {
     }
 
     @Step("Информация о пользователе по ид получена")
-    public static List<User> getUserByLogin(String login) {
+    public static List<User>  getUserByLogin(User objectUser) {
         String query = "select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,login);
-        Assert.assertEquals(result.size(), 1, "Проверка размера результата");
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,objectUser.getLogin());
         return result.stream()
                 .map(map -> {
                     User user = new User();
@@ -113,7 +112,7 @@ public class UserRequests {
 
     @Step("Информация о пользователе получена")
     public static User getUser(User objectUser) {
-        return getAllUsers().stream()
+        return getUserByLogin(objectUser).stream()
                 .filter(user -> {
                     if (objectUser.getId() == null) {
                         return objectUser.getLogin().equals(user.getLogin());
