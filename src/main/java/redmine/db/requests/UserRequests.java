@@ -115,8 +115,7 @@ public class UserRequests {
 
     @Step("Информация о пользователе получена")
     public static User getUser(User objectUser) {
-        String login=objectUser.getLogin();
-        return getUserByLogin(login).stream()
+        return getAllUsers().stream()
                 .filter(user -> {
                     if (objectUser.getId() == null) {
                         return objectUser.getLogin().equals(user.getLogin());
