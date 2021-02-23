@@ -26,9 +26,9 @@ public class GeneratorsSteps {
             if (parameters.containsKey("Статус")) {
                 user.setStatus(Integer.parseInt(parameters.get("Статус")));
             }
+            user.generate();
+            Context.put(stashId, user);
         }
-        //user.generate();
-        Context.put(stashId, user);
     }
 
     @Пусть("Существует список прав роли {string} с правами:")
