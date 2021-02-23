@@ -35,7 +35,7 @@ public class RoleRequests {
 
     @Step("Информация о роли получена")
     public static Role getRole(Role objectRole) {
-        return getAllRoles().stream()
+        return getRoleByName(objectRole.getName()).stream()
                 .filter(role -> {
                     if (objectRole.getId() == null) {
                         return objectRole.getName().equals(role.getName());
@@ -43,6 +43,26 @@ public class RoleRequests {
                 })
                 .findFirst()
                 .orElse(null);
+    }
+    @Step("Информация о роли, по имени, роли получена")
+    public static List<Role> getRoleByName(String name) {
+        String query = "select * from roles where name=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,name);
+        return result.stream()
+                .map(map -> {
+                    Role role = new Role();
+                    role.setId((Integer) map.get("id"));
+                    role.setPosition((Integer) map.get("position"));
+                    role.setBuiltin((Integer) map.get("builtin"));
+                    role.setName((String) map.get("name"));
+                    role.setAssignable((Boolean) map.get("assignable"));
+                    role.setIssuesVisibility(IssuesVisibility.valueOf(((String) map.get("issues_visibility")).toUpperCase()));
+                    role.setPermissions(RolePermissions.of((String) map.get("permissions")));
+                    role.setTimeEntriesVisibility(TimeEntriesVisibility.valueOf(((String) map.get("time_entries_visibility")).toUpperCase()));
+                    role.setAllRolesManaged((Boolean) map.get("all_roles_managed"));
+                    role.setSettings((String) map.get("settings"));
+                    return role;
+                }).collect(Collectors.toList());
     }
 
     @Step("Создание роли")
