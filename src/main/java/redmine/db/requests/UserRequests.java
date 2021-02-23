@@ -96,8 +96,8 @@ public class UserRequests {
 
     @Step("Информация о пользователе по ид получена")
     public static List<User> getUserByLogin(String login) {
-        String query = String.format("select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id where login='%s'", login);
-        List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+        String query ="select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id where login=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,login);
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         return result.stream()
                 .map(map -> {
