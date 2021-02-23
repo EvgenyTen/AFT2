@@ -35,12 +35,6 @@ public class Role implements Generatable<Role> {
             "  add_issue_notes: []\n" +
             "  delete_issues: []\n";
 
-
-    @Override
-    public Role read() {
-        return RoleRequests.getRole(this);
-    }
-
     @Override
     public Role update() {
         return RoleRequests.updateRole(this);
@@ -49,5 +43,10 @@ public class Role implements Generatable<Role> {
     @Override
     public Role create() {
         return RoleRequests.addRole(this);
+    }
+
+    @Override
+    public Role read() {
+        return RoleRequests.getRole(this);
     }
 }

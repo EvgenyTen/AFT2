@@ -33,11 +33,6 @@ public class User implements Generatable<User> {
     private String apiKey = StringGenerators.randomString(40, "0123456789abcdef");
 
     @Override
-    public User read() {
-        return UserRequests.getUser(this);
-    }
-
-    @Override
     public User update() {
         return UserRequests.updateUser(this);
     }
@@ -50,6 +45,12 @@ public class User implements Generatable<User> {
     public String getGeneratedHashedPassword() {
         return sha1Hex(salt + sha1Hex(password));
     }
+
+    @Override
+    public User read() {
+        return UserRequests.getUser(this);
+    }
+
 
 
 }
