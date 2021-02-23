@@ -29,7 +29,7 @@ public class Project implements Generatable<Project> {
     private Integer lft = 3;
     private Integer rgt = 3;
     private Boolean inheritMembers = false;
-    private Map<User,Role> assignedUsers;
+    private Map<User, Role> assignedUsers;
 
     @Override
     public Project read() {
@@ -47,8 +47,8 @@ public class Project implements Generatable<Project> {
     }
 
     public static void addUserAndRoleToProject(Project project, User user, Role role) {
-        Map<User,Role> assignedUsers=new HashMap<>();
-        assignedUsers.put(user,role);
+        Map<User, Role> assignedUsers = new HashMap<>();
+        assignedUsers.put(user, role);
         ProjectRequests.addUserAndRoleToProject(project, user, role);
     }
 }

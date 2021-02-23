@@ -4,10 +4,12 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import redmine.managers.Manager;
 import redmine.model.user.User;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import static redmine.utils.StringGenerators.randomEmail;
 
 
@@ -75,8 +77,8 @@ public class UserRequests {
 
     @Step("Информация о пользователе по ид получена")
     public static List<User> getUserById(Integer id) {
-        String query ="select * from users where id=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,id);
+        String query = "select * from users where id=?";
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, id);
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         return result.stream()
                 .map(map -> {
@@ -93,9 +95,9 @@ public class UserRequests {
     }
 
     @Step("Информация о пользователе по логину получена")
-    public static List<User>  getUserByLogin(String login) {
+    public static List<User> getUserByLogin(String login) {
         String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,login);
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, login);
         return result.stream()
                 .map(map -> {
                     User user = new User();

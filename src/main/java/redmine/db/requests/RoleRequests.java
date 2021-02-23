@@ -6,6 +6,7 @@ import redmine.model.role.IssuesVisibility;
 import redmine.model.role.Role;
 import redmine.model.role.RolePermissions;
 import redmine.model.role.TimeEntriesVisibility;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,10 +44,11 @@ public class RoleRequests {
                 .findFirst()
                 .orElse(null);
     }
+
     @Step("Информация о роли, по имени, роли получена")
     public static List<Role> getRoleByName(String name) {
         String query = "select * from roles where name=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,name);
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, name);
         return result.stream()
                 .map(map -> {
                     Role role = new Role();

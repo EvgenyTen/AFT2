@@ -6,7 +6,9 @@ import org.openqa.selenium.WebElement;
 import redmine.managers.Context;
 import redmine.model.user.User;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
+
 import java.util.Objects;
+
 import static redmine.utils.StringGenerators.randomEmail;
 
 public class ElementSteps {
@@ -44,7 +46,7 @@ public class ElementSteps {
     @И("Установить чекбокс {string}")
     public void setCheckBoxCreatePasswordOn(String fieldName) {
         WebElement elementCreatePasswordCheckBox = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", fieldName);
-        if(!elementCreatePasswordCheckBox.isSelected()){
+        if (!elementCreatePasswordCheckBox.isSelected()) {
             elementCreatePasswordCheckBox.click();
         }
     }
@@ -54,17 +56,14 @@ public class ElementSteps {
         if (Objects.equals(fieldElement, "Фамилия")) {
             WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Фамилия");
             pushFamily.click();
-        }
-        else if (Objects.equals(fieldElement, "Имя")) {
+        } else if (Objects.equals(fieldElement, "Имя")) {
             WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Имя");
             pushName.click();
-        }
-        else if (Objects.equals(fieldElement, "Пользователь")) {
+        } else if (Objects.equals(fieldElement, "Пользователь")) {
             WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Пользователь");
             pushUser.click();
-        }
-        else{
-            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
+        } else {
+            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
 }

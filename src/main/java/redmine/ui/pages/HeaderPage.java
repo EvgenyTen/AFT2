@@ -21,7 +21,7 @@ public class HeaderPage extends AbstractPage {
     public WebElement loggedAs;
 
     @CucumberName("Логин вошедшего пользователя")
-    @FindBy(xpath="")
+    @FindBy(xpath = "")
     public WebElement activeUser;
 
     @FindBy(xpath = "//a[@class='home']")
@@ -79,7 +79,7 @@ public class HeaderPage extends AbstractPage {
     }
 
     @Step("Присутствует элемент с названием 'Логин вошедшего пользователя'")
-    public String active(){
+    public String active() {
         return activeUser.getText();
     }
 }

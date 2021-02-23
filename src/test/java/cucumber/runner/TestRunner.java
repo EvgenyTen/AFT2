@@ -8,13 +8,14 @@ import org.testng.ITest;
 import org.testng.annotations.*;
 import redmine.managers.Context;
 import redmine.managers.Manager;
+
 import java.lang.reflect.Method;
 
 @CucumberOptions(
         plugin = {"pretty", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm", "json:target/cucumber.json"},
         glue = {"cucumber"},
         features = "src/test/resources",
-        tags = {"@UI","API"}
+        tags = {"@UI", "API"}
 )
 @Listeners({TestNGListenerImpl.class})
 public class TestRunner extends AbstractTestNGCucumberTests implements ITest {

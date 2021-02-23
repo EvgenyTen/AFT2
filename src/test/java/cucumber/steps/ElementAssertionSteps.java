@@ -12,8 +12,10 @@ import redmine.ui.pages.UsersPage;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
 import redmine.utils.Asserts;
 import redmine.utils.BrowserUtils;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 import static redmine.ui.pages.helpers.Pages.getPage;
 
 public class ElementAssertionSteps {
@@ -69,7 +71,7 @@ public class ElementAssertionSteps {
 
     @И("Таблица пользователей не отсортирована по столбцу {string}")
     public void assertUnSorting(String fieldElement) {
-        if(fieldElement.equals("Фамилия")) {
+        if (fieldElement.equals("Фамилия")) {
             List<String> actualList = getPage(UsersPage.class).listOfLastNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -79,8 +81,7 @@ public class ElementAssertionSteps {
                     .sorted()
                     .collect(Collectors.toList());
             Assert.assertNotEquals(actualList, notExpectedOrderedByAscList);
-        }
-        else if(fieldElement.equals("Имя")) {
+        } else if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -91,9 +92,8 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
 
             Assert.assertNotEquals(actualList, notExpectedOrderedByAscList);
-        }
-        else{
-            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
+        } else {
+            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
 
     }
@@ -110,8 +110,7 @@ public class ElementAssertionSteps {
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
             Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        }
-        else if (fieldElement.equals("Имя")) {
+        } else if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -121,8 +120,7 @@ public class ElementAssertionSteps {
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
             Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        }
-        else if (fieldElement.equals("Логин")) {
+        } else if (fieldElement.equals("Логин")) {
             List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -132,9 +130,8 @@ public class ElementAssertionSteps {
                     .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                     .collect(Collectors.toList());
             Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        }
-        else{
-            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
+        } else {
+            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
 
@@ -151,8 +148,7 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
-        }
-        else if (fieldElement.equals("Имя")) {
+        } else if (fieldElement.equals("Имя")) {
             List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -163,8 +159,7 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
-        }
-        else if (fieldElement.equals("Логин")) {
+        } else if (fieldElement.equals("Логин")) {
             List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
                     .stream()
                     .map(WebElement::getText)
@@ -175,9 +170,8 @@ public class ElementAssertionSteps {
                     .collect(Collectors.toList());
 
             Asserts.assertEquals(actualList, expectedOrderedByAscList);
-        }
-        else{
-            throw new IllegalArgumentException("Не корректный параметр "+fieldElement);
+        } else {
+            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
 

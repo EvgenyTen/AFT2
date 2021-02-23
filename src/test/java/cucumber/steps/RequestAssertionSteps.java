@@ -28,7 +28,7 @@ public class RequestAssertionSteps {
     public void assertUserInformationAfterCreationInDb(String userDataStashId) {
         User userContext = Context.get(userDataStashId, User.class);
         String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,userContext.getLogin());
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getLogin());
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
         Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
@@ -66,8 +66,8 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело ответа содержит {int} ошибки,с текстом:")
-    public void errorsCheck(Integer errorCount,List <String> parameters ) {
-        int receivedErrorsCount=parameters.size();
+    public void errorsCheck(Integer errorCount, List<String> parameters) {
+        int receivedErrorsCount = parameters.size();
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
 
@@ -75,13 +75,12 @@ public class RequestAssertionSteps {
             Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
-        }
-        else if (receivedErrorsCount == 3) {
+        } else if (receivedErrorsCount == 3) {
             Asserts.assertEquals(errors.getErrors().size(), errorCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
             Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
-        }else{
+        } else {
             throw new IllegalArgumentException("Нужно добавить случаи для большего количества ошибок " + receivedErrorsCount);
         }
     }
@@ -90,7 +89,7 @@ public class RequestAssertionSteps {
     public void assertUserInformationChangedAfterPutRequest(String userStashDto) {
         UserDto userContext = Context.get(userStashDto, UserDto.class);
         String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,userContext.getUser().getLogin());
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
         Map<String, Object> dbUser = result.get(0);
         Asserts.assertEquals(dbUser.get("status"), 1);
     }
@@ -121,7 +120,7 @@ public class RequestAssertionSteps {
     public void assertUserInformationExistInDb(String stashId) {
         User userContext = Context.get(stashId, User.class);
         String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,userContext.getLogin());
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getLogin());
         Assert.assertEquals(result.size(), 1, "Проверка размера результата");
         Map<String, Object> dbUser = result.get(0);
         Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());

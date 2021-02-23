@@ -9,6 +9,7 @@ import redmine.model.user.User;
 import redmine.ui.pages.LoginPage;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
 import redmine.utils.Asserts;
+
 import static redmine.ui.pages.helpers.Pages.getPage;
 
 public class LoginSteps {
