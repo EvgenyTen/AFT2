@@ -113,12 +113,8 @@ public class UserRequests {
 
     @Step("Информация о пользователе получена")
     public static User getUser(User objectUser) {
-        return getAllUsers().stream()
-                .filter(user -> {
-                    if (objectUser.getId() == null) {
-                        return objectUser.getLogin().equals(user.getLogin());
-                    } else return (objectUser.getId().equals(user.getId()));
-                })
+        return getUserByLogin(objectUser.getLogin()).stream()
+                .filter(user -> objectUser.getLogin().equals(user.getLogin()))
                 .findFirst()
                 .orElse(null);
     }
