@@ -92,7 +92,7 @@ public class UserRequests {
                 }).collect(Collectors.toList());
     }
 
-    @Step("Информация о пользователе по ид получена")
+    @Step("Информация о пользователе по логину получена")
     public static List<User>  getUserByLogin(User objectUser) {
         String query = "select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id where login=?";
         List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,objectUser.getLogin());
@@ -112,7 +112,7 @@ public class UserRequests {
 
     @Step("Информация о пользователе получена")
     public static User getUser(User objectUser) {
-        return getUserByLogin(objectUser).stream()
+        return getAllUsers().stream()
                 .filter(user -> {
                     if (objectUser.getId() == null) {
                         return objectUser.getLogin().equals(user.getLogin());
