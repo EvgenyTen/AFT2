@@ -17,7 +17,7 @@ public class UserRequests {
     @Step("Информация о пользователях получена")
     public static List<User> getAllUsers() {
         String query = "select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id";
-        List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query);
         return result.stream()
                 .map(map -> {
                     User user = new User();

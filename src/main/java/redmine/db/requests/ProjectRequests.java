@@ -16,7 +16,7 @@ public class ProjectRequests {
     @Step("Получение всех проектов из ДБ")
     public static List<Project> getAllProjects() {
         String query = "select * from projects";
-        List<Map<String, Object>> result = dbConnection.executeQuery(query);
+        List<Map<String, Object>> result = dbConnection.executePreparedQuery(query);
         return result.stream()
                 .map(map -> {
                     Project project = new Project();
