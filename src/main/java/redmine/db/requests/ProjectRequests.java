@@ -50,7 +50,7 @@ public class ProjectRequests {
     }
 
     @Step("Добавление пользователя и роли к проекту")
-    public static Project addUserAndRoleToProject(Project project, User user, Role role) {
+    public static void addUserAndRoleToProject(Project project, User user, Role role) {
         String queryPutIntoMembers = "insert into public.members\n" +
                 "(id,user_id,project_id,created_on,mail_notification) values(default,?,?,?,false) RETURNING id;\n";
         List<Map<String, Object>> resultQueryPutIntoMembers = dbConnection.executePreparedQuery(queryPutIntoMembers,
@@ -61,7 +61,6 @@ public class ProjectRequests {
         String queryPutToMembersRoles = "insert into public.member_roles\n" +
                 "(id,member_id,role_id,inherited_from) values (default,?,?,NULL) returning id;\n";
         dbConnection.executePreparedQuery(queryPutToMembersRoles, membersId, role.getId());
-        return project;
     }
 }
 
