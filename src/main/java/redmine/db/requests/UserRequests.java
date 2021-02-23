@@ -93,9 +93,9 @@ public class UserRequests {
     }
 
     @Step("Информация о пользователе по логину получена")
-    public static List<User>  getUserByLogin(User objectUser) {
+    public static List<User>  getUserByLogin(String login) {
         String query = "select * from users u inner join tokens t on u.id=t.user_id inner join email_addresses e on u.id=e.user_id where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,objectUser.getLogin());
+        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query,login);
         return result.stream()
                 .map(map -> {
                     User user = new User();
@@ -112,7 +112,7 @@ public class UserRequests {
 
     @Step("Информация о пользователе получена")
     public static User getUser(User objectUser) {
-        return getAllUsers().stream()
+        return getUserByLogin(objectUser.getLogin()).stream()
                 .filter(user -> {
                     if (objectUser.getId() == null) {
                         return objectUser.getLogin().equals(user.getLogin());
