@@ -4,9 +4,9 @@ import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import redmine.cucumber.ParametersValidator;
 import redmine.managers.Context;
 import redmine.model.project.Project;
-import redmine.model.user.User;
 import redmine.ui.pages.ProjectsPage;
 import redmine.ui.pages.UsersPage;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
@@ -41,10 +41,9 @@ public class ElementAssertionSteps {
         Assert.assertFalse(BrowserUtils.isElementCurrentlyPresent(element));
     }
 
-    @То("Отображается сообщение {string}{string}{string}")
-    public void assertCreationMessage(String user, String userDataStashId, String created) {
-        User userContext = Context.get(userDataStashId, User.class);
-        String result = String.format("%s %s %s", user, userContext.getLogin(), created);
+    @То("Отображается сообщение {string}")
+    public void assertCreationMessage(String rawString) throws IllegalAccessException {
+        String result= ParametersValidator.replaceCucumberVariables(rawString);
         WebElement element = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", "Уведомление о создании нового пользователя");
         Asserts.assertEquals(element.getText(), result);
     }
