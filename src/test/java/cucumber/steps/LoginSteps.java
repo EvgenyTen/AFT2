@@ -33,7 +33,7 @@ public class LoginSteps {
         Asserts.assertEquals(actualElementName, text);
     }
 
-    @То("На странице {string} элемент {String} имеет текст {string}")
+    @То("На странице {string} элемент {string} имеет текст {string}")
     public void assertLoggedAsElement(String pageName, String fieldName,String rawString) throws IllegalAccessException {
         String result= ParametersValidator.replaceCucumberVariables(rawString);
         WebElement element = CucumberPageObjectHelper.getElementBy(pageName, fieldName);
