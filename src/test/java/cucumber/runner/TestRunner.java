@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
         glue = {"cucumber"},
         features = "src/test/resources",
         tags = {"@UI", "@API"}
+
 )
 @Listeners({TestNGListenerImpl.class})
 public class TestRunner extends AbstractTestNGCucumberTests implements ITest {
