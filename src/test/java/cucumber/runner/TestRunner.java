@@ -8,7 +8,6 @@ import org.testng.ITest;
 import org.testng.annotations.*;
 import redmine.managers.Context;
 import redmine.managers.Manager;
-
 import java.lang.reflect.Method;
 
 @CucumberOptions(
@@ -16,8 +15,8 @@ import java.lang.reflect.Method;
         glue = {"cucumber"},
         features = "src/test/resources",
         tags = {"@UI", "@API"}
-
 )
+
 @Listeners({TestNGListenerImpl.class})
 public class TestRunner extends AbstractTestNGCucumberTests implements ITest {
     private static String testCaseName;
