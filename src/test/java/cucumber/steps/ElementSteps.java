@@ -2,7 +2,6 @@ package cucumber.steps;
 
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.И;
-import cucumber.api.java.ru.То;
 import org.openqa.selenium.WebElement;
 import redmine.managers.Context;
 import redmine.model.user.User;
@@ -67,12 +66,5 @@ public class ElementSteps {
             throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
-
-    @То("На странице {string} элемент {String} имеет текст {string}")
-    public void checkLoggedAstext(String pageName, String fieldName,String rawString) {
-
-
-    }
-
 
 }

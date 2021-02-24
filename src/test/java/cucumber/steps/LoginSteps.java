@@ -2,7 +2,9 @@ package cucumber.steps;
 
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.И;
+import cucumber.api.java.ru.То;
 import org.openqa.selenium.WebElement;
+import redmine.cucumber.ParametersValidator;
 import redmine.managers.Context;
 import redmine.managers.Manager;
 import redmine.model.user.User;
@@ -31,16 +33,12 @@ public class LoginSteps {
         Asserts.assertEquals(actualElementName, text);
     }
 
-    @И("На странице {string} присутствует элемент {string}{string}")
-    public void assertLoggedAsElement(String pageName, String fieldName, String stashId) {
-        User user = Context.get(stashId, User.class);
+    @То("На странице {string} элемент {String} имеет текст {string}")
+    public void assertLoggedAsElement(String pageName, String fieldName,String rawString) throws IllegalAccessException {
+        String result= ParametersValidator.replaceCucumberVariables(rawString);
         WebElement element = CucumberPageObjectHelper.getElementBy(pageName, fieldName);
         String actualElementName = element.getText();
         System.out.println(actualElementName);
-        Asserts.assertEquals(actualElementName, "Вошли как " + user.getLogin());
-    }
-
-    @И("На странице {string} текст элемента {string} содержит логин пользователя {string}")
-    public void assertActiveUserLoginInLoggedAs(String pageName, String fieldName, String stashId) {
+        Asserts.assertEquals(actualElementName, result);
     }
 }
