@@ -53,17 +53,14 @@ public class RequestAssertionSteps {
     @И("В базе данных появилась запись с данными пользователя {string}")
     public void assertUserInformationExistAfterCreationInDb(String userDataStashId) {
         UserDto userContext = Context.get(userDataStashId, UserDto.class);
-        String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
-        Assert.assertEquals(result.size(), 1, "Проверка размера результата");
-        Map<String, Object> dbUser = result.get(0);
-        Asserts.assertEquals(dbUser.get("login"), userContext.getUser().getLogin());
-        Asserts.assertEquals(dbUser.get("firstname"), userContext.getUser().getFirstname());
-        Asserts.assertEquals(dbUser.get("lastname"), userContext.getUser().getLastname());
-        Asserts.assertEquals(dbUser.get("status"), userContext.getUser().getStatus());
+        User dbUser = UserRequests.getUserByLogin(userContext.getUser().getLogin()).get(0);
+        Asserts.assertEquals(dbUser.getLogin(), userContext.getUser().getLogin());
+        Asserts.assertEquals(dbUser.getFirstName(), userContext.getUser().getFirstname());
+        Asserts.assertEquals(dbUser.getLastName(), userContext.getUser().getLastname());
+        Asserts.assertEquals(dbUser.getStatus(), userContext.getUser().getStatus());
     }
 
-    @То("Тело ответа содержит {int} ошибки,с текстом:")
+    @То("Тело ответа содержит ошибки,с текстами:")
     public void errorsCheck(Integer errorCount, List<String> parameters) {
         int receivedErrorsCount = parameters.size();
         Response response = Context.get("response", Response.class);
@@ -86,10 +83,8 @@ public class RequestAssertionSteps {
     @То("В базе данных изменилась запись с данными пользователя {string}")
     public void assertUserInformationChangedAfterPutRequest(String userStashId) {
         UserDto userContext = Context.get(userStashId, UserDto.class);
-        String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
-        Map<String, Object> dbUser = result.get(0);
-        Asserts.assertEquals(dbUser.get("status"), 1);
+        User dbUser = UserRequests.getUserByLogin(userContext.getUser().getLogin()).get(0);
+        Asserts.assertEquals(dbUser.getStatus(), 1);
     }
 
     @То("В базе данных отсутствует информация о пользователе {string}, созданном администратором")
@@ -117,14 +112,11 @@ public class RequestAssertionSteps {
     @И("В теле содержится информация о пользователе {string}")
     public void assertUserInformationExistInDb(String stashId) {
         User userContext = Context.get(stashId, User.class);
-        String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getLogin());
-        Assert.assertEquals(result.size(), 1, "Проверка размера результата");
-        Map<String, Object> dbUser = result.get(0);
-        Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
-        Asserts.assertEquals(dbUser.get("firstname"), userContext.getFirstName());
-        Asserts.assertEquals(dbUser.get("lastname"), userContext.getLastName());
-        Asserts.assertEquals(dbUser.get("status"), userContext.getStatus());
+        User dbUser = UserRequests.getUserByLogin(userContext.getLogin()).get(0);
+        Asserts.assertEquals(dbUser.getLogin(), userContext.getLogin());
+        Asserts.assertEquals(dbUser.getFirstName(), userContext.getFirstName());
+        Asserts.assertEquals(dbUser.getLastName(), userContext.getLastName());
+        Asserts.assertEquals(dbUser.getStatus(), userContext.getStatus());
     }
 
     @То("В теле содержится информация пользователя {string}, отсутствуют поля admin и apikey")
