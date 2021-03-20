@@ -65,18 +65,8 @@ public class RequestAssertionSteps {
         int receivedErrorsCount = errorMessages.size();
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
-        if (receivedErrorsCount == 2) {
-            Asserts.assertEquals(errors.getErrors().size(), receivedErrorsCount);
-            Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
-            Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
-        } else if (receivedErrorsCount == 3) {
-            Asserts.assertEquals(errors.getErrors().size(), receivedErrorsCount);
-            Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
-            Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
-            Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
-        } else {
-            throw new IllegalArgumentException("Нужно добавить случаи для большего количества ошибок " + receivedErrorsCount);
-        }
+        Asserts.assertEquals(errors.getErrors().size(), receivedErrorsCount);
+        errorMessages.forEach(message -> Assert.assertTrue(errors.getErrors().contains(message)));
     }
 
     @То("В базе данных изменилась запись с данными пользователя {string}")

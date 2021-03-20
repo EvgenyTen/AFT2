@@ -13,6 +13,7 @@ import redmine.managers.Context;
 import redmine.model.dto.UserDto;
 import redmine.model.dto.UserInfo;
 import redmine.model.user.User;
+
 import static redmine.utils.StringGenerators.randomEmail;
 import static redmine.utils.StringGenerators.randomEnglishLowerString;
 import static redmine.utils.gson.GsonHelper.getGson;
@@ -71,7 +72,7 @@ public class RequestSteps {
         ApiClient apiClient = new RestApiClient(user);
         UserDto userContext = Context.get(userStashId, UserDto.class);
         User dbUser = UserRequests.getUserByLogin(userContext.getUser().getLogin()).get(0);
-        Integer userId=dbUser.getId();
+        Integer userId = dbUser.getId();
         Integer newStatus = 1;
         UserDto userDto = new UserDto().setUser(new UserInfo()
                 .setLogin(userContext.getUser().getLogin())
@@ -95,7 +96,7 @@ public class RequestSteps {
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         User dbUser = UserRequests.getUserByLogin(userContext.getUser().getLogin()).get(0);
-        Integer userId=dbUser.getId();
+        Integer userId = dbUser.getId();
         String uri = String.format("users/%d.json", userId);
         Request request = new RestRequest(uri, HttpMethods.GET, null, null, null);
         Response response = apiClient.executeRequest(request);
