@@ -99,38 +99,42 @@ public class ElementAssertionSteps {
 
     @И("Таблица пользователей отсортирована по столбцу {string}, по убыванию")
     public void assertSortingByDesc(String fieldElement) {
-        if (fieldElement.equals("Фамилия")) {
-            List<String> actualList = getPage(UsersPage.class).listOfLastNamesInTable
-                    .stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-            List<String> expectedOrderedByDescList = actualList
-                    .stream()
-                    .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
-                    .collect(Collectors.toList());
-            Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        } else if (fieldElement.equals("Имя")) {
-            List<String> actualList = getPage(UsersPage.class).listOfNamesInTable
-                    .stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-            List<String> expectedOrderedByDescList = actualList
-                    .stream()
-                    .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
-                    .collect(Collectors.toList());
-            Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        } else if (fieldElement.equals("Логин")) {
-            List<String> actualList = getPage(UsersPage.class).listOfUsernamesInTable
-                    .stream()
-                    .map(WebElement::getText)
-                    .collect(Collectors.toList());
-            List<String> expectedOrderedByDescList = actualList
-                    .stream()
-                    .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
-                    .collect(Collectors.toList());
-            Asserts.assertEquals(actualList, expectedOrderedByDescList);
-        } else {
-            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
+        switch (fieldElement) {
+            case "Фамилия":
+                List<String> actualLastNamesList = getPage(UsersPage.class).listOfLastNamesInTable
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+                List<String> expectedOrderedLastNamesByDescList = actualLastNamesList
+                        .stream()
+                        .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
+                        .collect(Collectors.toList());
+                Asserts.assertEquals(actualLastNamesList, expectedOrderedLastNamesByDescList);
+                break;
+            case "Имя":
+                List<String> actualNamesList = getPage(UsersPage.class).listOfNamesInTable
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+                List<String> expectedOrderedNamesByDescList = actualNamesList
+                        .stream()
+                        .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
+                        .collect(Collectors.toList());
+                Asserts.assertEquals(actualNamesList, expectedOrderedNamesByDescList);
+                break;
+            case "Логин":
+                List<String> actualUsernamesList = getPage(UsersPage.class).listOfUsernamesInTable
+                        .stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+                List<String> expectedOrderedUsernamesByDescList = actualUsernamesList
+                        .stream()
+                        .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
+                        .collect(Collectors.toList());
+                Asserts.assertEquals(actualUsernamesList, expectedOrderedUsernamesByDescList);
+                break;
+            default:
+                throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
 
