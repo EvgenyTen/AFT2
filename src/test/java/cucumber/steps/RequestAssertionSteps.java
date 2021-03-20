@@ -4,6 +4,7 @@ import cucumber.api.java.ru.И;
 import cucumber.api.java.ru.То;
 import org.testng.Assert;
 import redmine.api.interfaces.Response;
+import redmine.db.requests.UserRequests;
 import redmine.managers.Context;
 import redmine.managers.Manager;
 import redmine.model.dto.UserCreationError;
@@ -27,13 +28,10 @@ public class RequestAssertionSteps {
     @И("В базе данных появилась запись с данными {string}")
     public void assertUserInformationAfterCreationInDb(String userDataStashId) {
         User userContext = Context.get(userDataStashId, User.class);
-        String query = "select * from users where login=?";
-        List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getLogin());
-        Assert.assertEquals(result.size(), 1, "Проверка размера результата");
-        Map<String, Object> dbUser = result.get(0);
-        Asserts.assertEquals(dbUser.get("login"), userContext.getLogin());
-        Asserts.assertEquals(dbUser.get("firstname"), userContext.getFirstName());
-        Asserts.assertEquals(dbUser.get("lastname"), userContext.getLastName());
+        User dbUser = UserRequests.getUserByLogin(userContext.getLogin()).get(0);
+        Asserts.assertEquals(dbUser.getLogin(), userContext.getLogin());
+        Asserts.assertEquals(dbUser.getFirstName(), userContext.getFirstName());
+        Asserts.assertEquals(dbUser.getLastName(), userContext.getLastName());
     }
 
     @То("Тело содержит данные созданного пользователя {string}")
