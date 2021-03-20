@@ -104,8 +104,9 @@ public class RequestSteps {
         UserDto userContext = Context.get(userStashId, UserDto.class);
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
-        User dbUser= (User) UserRequests.getUserByLogin(userContext.getUser().getLogin());
-        Integer userId = dbUser.getId();
+
+        User dbUser = UserRequests.getUserByLogin(userContext.getUser().getLogin()).get(0);
+        Integer userId=dbUser.getId();
         String uri = String.format("users/%d.json", userId);
         Request request = new RestRequest(uri, HttpMethods.GET, null, null, null);
         Response response = apiClient.executeRequest(request);
