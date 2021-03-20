@@ -7,8 +7,6 @@ import redmine.managers.Context;
 import redmine.model.user.User;
 import redmine.ui.pages.helpers.CucumberPageObjectHelper;
 
-import java.util.Objects;
-
 import static redmine.utils.StringGenerators.randomEmail;
 
 public class ElementSteps {
@@ -53,18 +51,21 @@ public class ElementSteps {
 
     @Если("В шапке таблицы пользователей нажать на {string}")
     public void pushTableHeader(String fieldElement) {
-        if (Objects.equals(fieldElement, "Фамилия")) {
-            WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Фамилия");
-            pushFamily.click();
-        } else if (Objects.equals(fieldElement, "Имя")) {
-            WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Имя");
-            pushName.click();
-        } else if (Objects.equals(fieldElement, "Пользователь")) {
-            WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Пользователь");
-            pushUser.click();
-        } else {
-            throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
+        switch (fieldElement) {
+            case "Фамилия":
+                WebElement pushFamily = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Фамилия");
+                pushFamily.click();
+                break;
+            case "Имя":
+                WebElement pushName = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Имя");
+                pushName.click();
+                break;
+            case "Пользователь":
+                WebElement pushUser = CucumberPageObjectHelper.getElementBy("Страница Пользователи", "Пользователь");
+                pushUser.click();
+                break;
+            default:
+                throw new IllegalArgumentException("Не корректный параметр " + fieldElement);
         }
     }
-
 }
