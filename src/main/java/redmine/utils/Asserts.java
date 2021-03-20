@@ -9,9 +9,9 @@ public class Asserts {
         Assert.assertEquals(actual, expected);
     }
 
-    @Step("Проверка переменной actual: {0}, на присутствие")
+    @Step("Проверка переменной на присутствие")
     public static void assertNotNull(Object actual) { Assert.assertNotNull(actual); }
 
-    @Step("Проверка переменной actual: {0}, на отсутствие")
+    @Step("Проверка переменной на отсутствие")
     public static void assertNull(Object actual) { Assert.assertNull(actual); }
 }
