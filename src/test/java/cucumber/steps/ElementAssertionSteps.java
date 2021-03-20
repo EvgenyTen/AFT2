@@ -43,7 +43,7 @@ public class ElementAssertionSteps {
 
     @То("Отображается сообщение {string}")
     public void assertCreationMessage(String rawString) throws IllegalAccessException {
-        String result= ParametersValidator.replaceCucumberVariables(rawString);
+        String result = ParametersValidator.replaceCucumberVariables(rawString);
         WebElement element = CucumberPageObjectHelper.getElementBy("Страница создания нового пользователя", "Уведомление о создании нового пользователя");
         Asserts.assertEquals(element.getText(), result);
     }

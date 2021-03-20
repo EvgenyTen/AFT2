@@ -36,8 +36,8 @@ public class ParametersValidator {
                     .findFirst()
                     .orElseThrow(() -> new IllegalStateException("Не задана анотация @CucumberName" + stashObject));
             foundField.setAccessible(true);
-            String result=foundField.get(stashObject).toString();
-            rawString=rawString.replace(replacement,result);
+            String result = foundField.get(stashObject).toString();
+            rawString = rawString.replace(replacement, result);
         }
         return rawString;
     }

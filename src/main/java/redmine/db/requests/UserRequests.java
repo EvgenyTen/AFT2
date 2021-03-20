@@ -4,10 +4,12 @@ import io.qameta.allure.Step;
 import org.testng.Assert;
 import redmine.managers.Manager;
 import redmine.model.user.User;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import static redmine.utils.StringGenerators.randomEmail;
 
 
