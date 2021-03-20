@@ -8,4 +8,10 @@ public class Asserts {
     public static void assertEquals(Object actual, Object expected) {
         Assert.assertEquals(actual, expected);
     }
+
+    @Step("Проверка переменной actual: {0}, на присутствие")
+    public static void assertNotNull(Object actual) { Assert.assertNotNull(actual); }
+
+    @Step("Проверка переменной actual: {0}, на отсутствие")
+    public static void assertNull(Object actual) { Assert.assertNull(actual); }
 }

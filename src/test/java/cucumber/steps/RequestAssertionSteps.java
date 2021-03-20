@@ -41,13 +41,13 @@ public class RequestAssertionSteps {
         UserDto userContext = Context.get(userStashId, UserDto.class);
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
-        Assert.assertNotNull(createdUser.getUser().getId());
+        Asserts.assertNotNull(createdUser.getUser().getId());
         Asserts.assertEquals(createdUser.getUser().getLogin(), userContext.getUser().getLogin());
         Asserts.assertEquals(createdUser.getUser().getFirstname(), userContext.getUser().getFirstname());
         Asserts.assertEquals(createdUser.getUser().getLastname(), userContext.getUser().getLastname());
-        Assert.assertNull(createdUser.getUser().getPassword());
+        Asserts.assertNull(createdUser.getUser().getPassword());
         Asserts.assertEquals(createdUser.getUser().getMail(), userContext.getUser().getMail());
-        Assert.assertNull(createdUser.getUser().getLast_login_on());
+        Asserts.assertNull(createdUser.getUser().getLast_login_on());
         Asserts.assertEquals(createdUser.getUser().getStatus(), userContext.getUser().getStatus());
         Asserts.assertEquals(createdUser.getUser().getAdmin(), userContext.getUser().getAdmin());
     }
@@ -107,13 +107,13 @@ public class RequestAssertionSteps {
         User user = Context.get(stashId, User.class);
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
-        Assert.assertNotNull(createdUser.getUser().getId());
+        Asserts.assertNotNull(createdUser.getUser().getId());
         Asserts.assertEquals(createdUser.getUser().getLogin(), user.getLogin());
         Asserts.assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
         Asserts.assertEquals(createdUser.getUser().getLastname(), user.getLastName());
-        Assert.assertNull(createdUser.getUser().getPassword());
-        Assert.assertEquals(createdUser.getUser().getAdmin(), user.getAdmin());
-        Assert.assertEquals(createdUser.getUser().getApi_key(), user.getApiKey());
+        Asserts.assertNull(createdUser.getUser().getPassword());
+        Asserts.assertEquals(createdUser.getUser().getAdmin(), user.getAdmin());
+        Asserts.assertEquals(createdUser.getUser().getApi_key(), user.getApiKey());
     }
 
     @И("В теле содержится информация о пользователе {string}")
@@ -134,12 +134,12 @@ public class RequestAssertionSteps {
         User user = Context.get(stashId, User.class);
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
-        Assert.assertNotNull(createdUser.getUser().getId());
+        Asserts.assertNotNull(createdUser.getUser().getId());
         Asserts.assertEquals(createdUser.getUser().getLogin(), user.getLogin());
         Asserts.assertEquals(createdUser.getUser().getFirstname(), user.getFirstName());
         Asserts.assertEquals(createdUser.getUser().getLastname(), user.getLastName());
-        Assert.assertNull(createdUser.getUser().getPassword());
-        Assert.assertNull(createdUser.getUser().getAdmin());
-        Assert.assertNull(createdUser.getUser().getApi_key());
+        Asserts.assertNull(createdUser.getUser().getPassword());
+        Asserts.assertNull(createdUser.getUser().getAdmin());
+        Asserts.assertNull(createdUser.getUser().getApi_key());
     }
 }
