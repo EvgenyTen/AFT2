@@ -61,17 +61,16 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело ответа содержит ошибки,с текстами:")
-    public void errorsCheck(Integer errorCount, List<String> parameters) {
-        int receivedErrorsCount = parameters.size();
+    public void errorsCheck(List<String> errorMessages) {
+        int receivedErrorsCount = errorMessages.size();
         Response response = Context.get("response", Response.class);
         UserCreationError errors = getGson().fromJson(response.getBody().toString(), UserCreationError.class);
-
         if (receivedErrorsCount == 2) {
-            Asserts.assertEquals(errors.getErrors().size(), errorCount);
+            Asserts.assertEquals(errors.getErrors().size(), receivedErrorsCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email уже существует");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
         } else if (receivedErrorsCount == 3) {
-            Asserts.assertEquals(errors.getErrors().size(), errorCount);
+            Asserts.assertEquals(errors.getErrors().size(), receivedErrorsCount);
             Asserts.assertEquals(errors.getErrors().get(0), "Email имеет неверное значение");
             Asserts.assertEquals(errors.getErrors().get(1), "Пользователь уже существует");
             Asserts.assertEquals(errors.getErrors().get(2), "Пароль недостаточной длины (не может быть меньше 8 символа)");
