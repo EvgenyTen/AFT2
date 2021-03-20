@@ -90,7 +90,7 @@ public class GeneratorsSteps {
         Project project = Context.get(projectStashId, Project.class);
         User user = Context.get(stashId, User.class);
         Role role = Context.get(roleStashId, Role.class);
-        Project.addUserAndRoleToProject(project, user, role);
+        project.addUserAndRoleToProject(project, user, role);
     }
 }
 

@@ -46,8 +46,8 @@ public class Project implements Generatable<Project> {
         return ProjectRequests.createProject(this);
     }
 
-    public static void addUserAndRoleToProject(Project project, User user, Role role) {
-        Map<User, Role> assignedUsers = new HashMap<>();
+    public void addUserAndRoleToProject(Project project, User user, Role role) {
+        assignedUsers=new HashMap<>();
         assignedUsers.put(user, role);
         ProjectRequests.addUserAndRoleToProject(project, user, role);
     }
