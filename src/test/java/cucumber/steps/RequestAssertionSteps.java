@@ -37,8 +37,8 @@ public class RequestAssertionSteps {
     }
 
     @То("Тело содержит данные созданного пользователя {string}")
-    public void assertUserInformationExistInBody(String userStashDto) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void assertUserInformationExistInBody(String userStashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         Response response = Context.get("response", Response.class);
         UserDto createdUser = response.getBody(UserDto.class);
         Assert.assertNotNull(createdUser.getUser().getId());
@@ -86,8 +86,8 @@ public class RequestAssertionSteps {
     }
 
     @То("В базе данных изменилась запись с данными пользователя {string}")
-    public void assertUserInformationChangedAfterPutRequest(String userStashDto) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void assertUserInformationChangedAfterPutRequest(String userStashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         String query = "select * from users where login=?";
         List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
         Map<String, Object> dbUser = result.get(0);
@@ -95,8 +95,8 @@ public class RequestAssertionSteps {
     }
 
     @То("В базе данных отсутствует информация о пользователе {string}, созданном администратором")
-    public void assertUserInformationAbsentInDbAfterDeleteRequest(String userStashDto) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void assertUserInformationAbsentInDbAfterDeleteRequest(String userStashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         String query = "select * from users where login=?";
         List<Map<String, Object>> result = Manager.dbConnection.executePreparedQuery(query, userContext.getUser().getLogin());
         Assert.assertEquals(result.size(), 0, "Проверка отсутствия");

@@ -25,7 +25,7 @@ import static redmine.utils.gson.GsonHelper.getGson;
 public class RequestSteps {
 
     @Если("Отправить запрос на создание пользователя {string} пользователем {string} со статусом: {int}")
-    public void sendRequestOnUserCreation(String userStashDto, String stashId, int status) {
+    public void sendRequestOnUserCreation(String userStashId, String stashId, int status) {
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         String login = randomEnglishLowerString(8);
@@ -37,13 +37,13 @@ public class RequestSteps {
         String body = getGson().toJson(userDto);
         Request request = new RestRequest("users.json", HttpMethods.POST, null, null, body);
         Response response = apiClient.executeRequest(request);
-        Context.put(userStashDto, userDto);
+        Context.put(userStashId, userDto);
         Context.put("response", response);
     }
 
     @Если("Отправить повторный запрос на создание пользователя {string} пользователем {string} с тем же телом запроса")
-    public void sendRepeatedRequest(String userStashDto, String stashId) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void sendRepeatedRequest(String userStashId, String stashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         String body = getGson().toJson(userContext);
@@ -53,10 +53,10 @@ public class RequestSteps {
     }
 
     @То("Отправить НЕ корректный запрос на создание пользователя {string} пользователем {string}")
-    public void sendIncorrectRequest(String userStashDto, String stashId) {
+    public void sendIncorrectRequest(String userStashId, String stashId) {
         String incorrectMail = "santa.claus.petersburg";
         String incorrectPassword = randomEnglishLowerString(4);
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         UserDto incorrectUser = new UserDto().setUser(new UserInfo().setLogin(userContext.getUser().getLogin())
@@ -71,10 +71,10 @@ public class RequestSteps {
     }
 
     @Если("Отправить запрос на изменение пользователя {string} пользователем {string}")
-    public void sendRequestOnUserChange(String userStashDto, String stashId) {
+    public void sendRequestOnUserChange(String userStashId, String stashId) {
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+        UserDto userContext = Context.get(userStashId, UserDto.class);
 
         String query = String.format("select * from users where login='%s'", userContext.getUser().getLogin());
         List<Map<String, Object>> result = Manager.dbConnection.executeQuery(query);
@@ -94,13 +94,13 @@ public class RequestSteps {
         String uri = String.format("users/%d.json", userId);
         Request putRequest = new RestRequest(uri, HttpMethods.PUT, null, null, statusBody);
         Response response = apiClient.executeRequest(putRequest);
-        Context.put(userStashDto, userDto);
+        Context.put(userStashId, userDto);
         Context.put("response", response);
     }
 
     @Если("Отправить запрос на получении инфо о пользователе {string} пользователем {string}")
-    public void sendRequestOnUserGet(String userStashDto, String stashId) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void sendRequestOnUserGet(String userStashId, String stashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         String query = String.format("select * from users where login='%s'", userContext.getUser().getLogin());
@@ -111,13 +111,13 @@ public class RequestSteps {
         Request request = new RestRequest(uri, HttpMethods.GET, null, null, null);
         Response response = apiClient.executeRequest(request);
         UserDto userDto = response.getBody(UserDto.class);
-        Context.put(userStashDto, userDto);
+        Context.put(userStashId, userDto);
         Context.put("response", response);
     }
 
     @Если("Отправить запрос на удаление пользователя {string} пользователем {string}")
-    public void sendRequestOnUserDelete(String userStashDto, String stashId) {
-        UserDto userContext = Context.get(userStashDto, UserDto.class);
+    public void sendRequestOnUserDelete(String userStashId, String stashId) {
+        UserDto userContext = Context.get(userStashId, UserDto.class);
         User user = Context.get(stashId, User.class);
         ApiClient apiClient = new RestApiClient(user);
         Integer userId = userContext.getUser().getId();
