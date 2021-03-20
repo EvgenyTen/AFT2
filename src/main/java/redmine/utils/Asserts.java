@@ -10,8 +10,12 @@ public class Asserts {
     }
 
     @Step("Проверка переменной на присутствие")
-    public static void assertNotNull(Object actual) { Assert.assertNotNull(actual); }
+    public static void assertNotNull(Object actual) {
+        Assert.assertNotNull(actual);
+    }
 
     @Step("Проверка переменной на отсутствие")
-    public static void assertNull(Object actual) { Assert.assertNull(actual); }
+    public static void assertNull(Object actual) {
+        Assert.assertNull(actual);
+    }
 }
