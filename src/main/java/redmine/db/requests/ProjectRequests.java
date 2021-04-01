@@ -1,5 +1,6 @@
 package redmine.db.requests;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import redmine.model.project.Project;
 import redmine.model.role.Role;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static redmine.managers.Manager.*;
+import static redmine.managers.Manager.dbConnection;
 
 public class ProjectRequests {
     @Step("Получение всех проектов из ДБ")

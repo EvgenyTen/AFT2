@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-@Getter
+
 public class RestRequest implements Request {
 
     private final String uri;
@@ -51,5 +51,30 @@ public class RestRequest implements Request {
             sb.append(body.toString());
         }
         return sb.toString();
+    }
+
+    @Override
+    public String getUri() {
+        return uri;
+    }
+
+    @Override
+    public HttpMethods getMethod() {
+        return method;
+    }
+
+    @Override
+    public Map<String, String> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    @Override
+    public Object getBody() {
+        return body;
     }
 }

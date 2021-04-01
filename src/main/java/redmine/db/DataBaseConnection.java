@@ -34,12 +34,20 @@ public class DataBaseConnection {
         dbName = getStringProperty("dbName");
     }
 
-    @SneakyThrows
+
     @Step("Подключение к БД")
     private void connect() {
-        Class.forName("org.postgresql.Driver");
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         String url = String.format("jdbc:postgresql://%s:%d/%s?user=%s&password=%s", dbHost, dbPort, dbName, dbUser, dbPass);
-        connection = DriverManager.getConnection(url);
+        try {
+            connection = DriverManager.getConnection(url);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @SneakyThrows
